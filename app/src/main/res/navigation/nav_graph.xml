@@ -12,10 +12,30 @@
         <action
             android:id="@+id/action_mainFragment_to_settingsFragment"
             app:destination="@id/settingsFragment"
+            app:enterAnim="@anim/fragment_fade_enter"
+            app:exitAnim="@anim/fragment_fade_exit"
             app:popUpTo="@id/mainFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_recordDayFragment"
+            app:destination="@id/fragment_record_day"
+            app:enterAnim="@anim/fragment_fade_enter"
+            app:exitAnim="@anim/fragment_fade_exit" />
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
         android:name="xyz.spiral6.fitnesstracker.ui.settings.SettingsFragment"
         android:label="SettingsFragment" />
+    <fragment
+        android:id="@+id/fragment_record_day"
+        android:name="xyz.spiral6.fitnesstracker.ui.addDayRecord.addDayRecord"
+        tools:layout="@layout/fragment_add_day_record">
+        <action
+            android:id="@+id/action_recordDayFragment_to_recordDayCancelDialog"
+            app:destination="@id/recordDayCancelDialog" />
+        <action
+            android:id="@+id/action_fragment_record_day_to_recordDayConfirmationDialog"
+            app:destination="@id/recordDayConfirmationDialog" />
+    </fragment>
+    <fragment android:id="@+id/recordDayCancelDialog" />
+    <fragment android:id="@+id/recordDayConfirmationDialog" />
 </navigation>

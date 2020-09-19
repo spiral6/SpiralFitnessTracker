@@ -2,6 +2,7 @@ package xyz.spiral6.fitnesstracker.ui.main;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.os.Bundle;
@@ -19,8 +20,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
+
 import xyz.spiral6.fitnesstracker.R;
-import xyz.spiral6.fitnesstracker.ui.settings.SettingsFragment;
 
 public class MainFragment extends Fragment {
 
@@ -40,9 +43,21 @@ public class MainFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        Toolbar myToolbar = (Toolbar) view.findViewById(R.id.main_fragment_toolbar);
+        Toolbar myToolbar = (Toolbar) view.findViewById(R.id.mainFragmentToolbar);
         ((AppCompatActivity)getActivity()).setSupportActionBar(myToolbar);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(false); // hide title from ActionBar
+
+        FloatingActionButton fab = view.findViewById(R.id.mainFragmentFAB);
+        fab.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                // Example for onClick()
+                // Snackbar.make(view, "Clicked the FAB!", Snackbar.LENGTH_SHORT).setAction("FABAction", null).show();
+                NavHostFragment navHostFragment = (NavHostFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.nav_fragment_host);
+                NavController navController = navHostFragment.getNavController();
+                navController.navigate(R.id.action_mainFragment_to_recordDayFragment);
+            }
+        });
     }
 
     @Override
@@ -73,7 +88,7 @@ public class MainFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = ViewModelProviders.of(this).get(MainViewModel.class);
+        mViewModel = new ViewModelProvider(this).get(MainViewModel.class);
         // TODO: Use the ViewModel
     }
 
